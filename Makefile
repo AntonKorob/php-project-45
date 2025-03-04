@@ -15,8 +15,17 @@ test:
 
 .PHONY: install
 
+brain-game:
+		php bin/brain-game.php
+		
+brain-game:
+		php bin/brain-even.php
+
 install:
 	composer install
 
 line:
 	composer exec --verbose phpcs -- --standard=PSR12 src bin
+
+validate:
+	composer validate

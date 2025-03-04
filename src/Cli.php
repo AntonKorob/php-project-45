@@ -1,16 +1,11 @@
 <?php
-namespace cli;
-require_once __DIR__ . '/vendor/autoload.php';
+namespace BrainGames\Cli;
 
-function prompt(string $name)
-{
-    $name = trim($name);
-    echo $name;    
-}
+use function WP_CLI\Utils\line;
 
-function line($str, $userName)
+function welcome()
 {
-    $str = trim($str);
-    $usreName = trim($userName);
-    echo $str . " " . $userName;
+    line('Welcome to the Brain Games!');
+    $name = \WP_CLI\Utils\prompt('May I have your name?');
+    line("Hello, $name!");
 }
