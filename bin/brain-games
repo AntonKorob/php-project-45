@@ -1,3 +1,10 @@
 <?php
+namespace Cli;
+require_once __DIR__ . '/../vendor/autoload.php';
 
-echo "Welcome to the Brain Games!";
+use function cli\line;
+use function cli\prompt;
+
+line('Welcome to the Brain Game!');
+$name = prompt('My I have your name?');
+line("Hello, %s!", $name);
