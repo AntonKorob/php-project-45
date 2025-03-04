@@ -17,3 +17,6 @@ test:
 
 install:
 	composer install
+
+line:
+	composer exec --verbose phpcs -- --standard=PSR12 src bin
