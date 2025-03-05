@@ -1,26 +1,24 @@
 {
-    "autoload": {
-        "psr-0": {
-        "BrainGames\\": "src/",
-        "Vendor\\Namespace\\": "src/",
-        "Vendor_Namespace_": "src/"
+        "autoload": {
+            "files": ["src/cli/cli.php"],
+            "psr-0": {
+            "BrainGames\\": "src/Cli.php",
+            "Vendor\\Namespace\\": "src/",
+            "Vendor_Namespace_": "src/"
+            }
     },
-    "files": [
-        "src/Cli.php"
-    ]
-},
-"require": {
+        "require": {
         "wp-cli/php-cli-tools": "^0.11"
     },
-    "phpcs.executablePath": "./vendor/bin/phpcs",
+        "phpcs.executablePath": "./vendor/bin/phpcs",
 
-    "[php]": {
-    "editor.defaultFormatter": "wongjn.php-sniffer"
+        "[php]": {
+        "editor.defaultFormatter": 
+        "wongjn.php-sniffer"
     },
-    "bin":[
-        "bin/brain-games",
-        "bin/brain-even"
-    ]
+        "bin":[
+            "bin/brain-games",
+            "bin/brain-even"
+        ]
 
 }
-
