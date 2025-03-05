@@ -1,11 +1,8 @@
-#!/user/bin/evn php
+#!/usr/bin/env php
 <?php
-namespace Cli;
-require_once __DIR__ . '/../vendor/autoload.php';
 
-use function cli\line;
-use function cli\prompt;
+require __DIR__ . '/../vendor/autoload.php';
 
-line('Welcome to the Brain Game!');
-$name = prompt('My I have your name?');
-line("Hello, %s!", $name);
+use function BrainGames\Cli\welcome;
+
+welcome();
