@@ -1,11 +1,12 @@
 <?php
 namespace BrainGames\Cli;
 
-use function \wp\cli\line;
+use function cli\line;
+use function cli\prompt;
 
 function welcome()
 {
-    WP_CLI::line('Welcome to the Brain Games!');
-    $name = WP_CLI::prompt('May I have your name?');
-    WP_CLI::line("Hello, $name!");
+    line('Welcome to the Brain Games!');
+    $name = prompt('May I have your name?');
+    line("Hello, $name!");
 }
