@@ -1,5 +1,4 @@
 <?php
-
 namespace Engine\Calc;
 
 use function cli\line;
@@ -142,7 +141,7 @@ function hideElement(array $progression, int $hiddenIndex): array
 }
 
 // playProgressionGame
-function playProgressionGame()
+function runProgressionGame()
 {
     $correctAnswersNeeded = 3;
     $correctAnswers = 0;
@@ -178,4 +177,53 @@ function playProgressionGame()
     line("Congratulations!");
 }
 
+// isPrime
+
+function isPrime($n)
+{
+    // Числа меньше 2 не являются простыми
+    if ($n < 2) {
+        return false;
+    }
+
+    // 2 — единственное четное простое число
+    if ($n === 2) {
+        return true;
+    }
+
+    // Все остальные четные числа не являются простыми
+    if ($n % 2 === 0) {
+        return false;
+    }
+
+    // Проверяем делители от 3 до квадратного корня из n
+    for ($i = 3; $i <= sqrt($n); $i += 2) {
+        if ($n % $i === 0) {
+            return false;
+        }
+    }
+
+    // Если ни одно из условий не выполнено, число простое
+    return true;
+}
+
+function runPrime()
+{
+    line('Answer "yes" if the number is even, otherwise answer "no".');
+        
+        $number = generateRandomNumber(1, 100);
+        line('Question: %s', $number);
+        $answer = prompt('Your answer');
+
+        $correctAnswer = isPrime($number) ? 'yes' : 'no';
+
+        if ($answer === $correctAnswer) {
+            line('Correct!');
+        } else {
+            line("'%s' is wrong answer ;(. Correct answer was 'no'", $answer, $correctAnswer);
+            line("Let's try again!");
+            return;
+        }
+
+}
 
