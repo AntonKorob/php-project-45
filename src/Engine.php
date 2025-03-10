@@ -94,6 +94,7 @@ function runCaclulatorNOD()
 {   
     $correctAnswersNeeded = 3;
     $correctAnswers = 0;
+
 while ($correctAnswers < $correctAnswersNeeded) {
     $a = generateRandomNumber(1, 100);
     $b = generateRandomNumber(1, 100);
@@ -121,3 +122,60 @@ while ($correctAnswers < $correctAnswersNeeded) {
         line('Congratulations!');
 }
 }
+
+// generateProgression
+
+function generateProgression(int $length, int $start, int $step): array
+{
+    $progression = [];
+    for ($i = 0; $i < $length; $i++) {
+        $progression[] = $start + $i * $step;
+    }
+    return $progression;
+}
+
+// hideElement
+function hideElement(array $progression, int $hiddenIndex): array
+{
+    $progression[$hiddenIndex] = '..';
+    return $progression;
+}
+
+// playProgressionGame
+function playProgressionGame()
+{
+    $correctAnswersNeeded = 3;
+    $correctAnswers = 0;
+
+    while ($correctAnswers < $correctAnswersNeeded) {
+        // Генерируем прогрессию
+        $length = rand(5, 10);
+        $start = rand(1, 20);
+        $step = rand(1, 10);
+        $progression = generateProgression($length, $start, $step);
+        
+        // Выбираем случайный элемент для скрытия
+        $hiddenIndex = rand(0, $length - 1);
+        $hiddenValue = $progression[$hiddenIndex];
+        $progression = hideElement($progression, $hiddenIndex);
+        
+        var_dump($progression);
+        // Показываем прогрессию
+        line('Question: %s', implode(' ', $progression));
+        $userAnswer = prompt('Your answer');
+
+        // Проверяем ответ
+        if ((int)$userAnswer === $hiddenValue) {
+            line('Correct!');
+            $correctAnswers++;
+        } else {
+            line("'%s' is wrong answer ;(. Correct answer was '%s'.", $userAnswer, $hiddenValue);
+            line("Let's try again!");
+            return;
+        }
+    }
+
+    line("Congratulations!");
+}
+
+
