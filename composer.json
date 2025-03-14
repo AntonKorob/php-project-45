@@ -1,5 +1,5 @@
 {
-    "name": "php-project-45/brain-games",
+    "name": "hexlet/code",
     "description": "Brain Games Project",
     "require": {
         "wp-cli/php-cli-tools": "^0.12.4"
