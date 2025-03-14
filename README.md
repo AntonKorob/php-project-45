@@ -26,6 +26,12 @@
 
 ## Запуск игр
 
+- Игра: "Приветствие"
+  make brain-games
+## Демонстрация игры Brain Games
+
+[![asciicast](https://asciinema.org/a/YOUR_ASCIINEMA_ID.svg)](https://asciinema.org/a/YOUR_ASCIINEMA_ID)
+
 - Игра: "Проверка на четность"
   make brain-even
 

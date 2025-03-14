@@ -1,8 +1,8 @@
 <?php
-namespace Engine\Calc;
+namespace Engine;
 
-use function cli\line;
-use function cli\prompt;
+// use function cli\line;
+// use function cli\prompt;
 
 // generateRandomNumber
 function generateRandomNumber(int $min, int $max): int
@@ -158,7 +158,7 @@ function runProgressionGame()
         $hiddenValue = $progression[$hiddenIndex];
         $progression = hideElement($progression, $hiddenIndex);
         
-        var_dump($progression);
+        // var_dump($progression);
         // Показываем прогрессию
         line('Question: %s', implode(' ', $progression));
         $userAnswer = prompt('Your answer');

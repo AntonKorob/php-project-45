@@ -5,12 +5,11 @@
         "wp-cli/php-cli-tools": "^0.12.4"
     },
     "autoload": {
-        "psr-4": {
-            "php-project-45\\": "src/"
-        }
-        
+        "files": [
+            "src/Cli.php",
+            "src/Engine.php"
+        ]
     },
-    "phpcs.executablePath": "./vendor/bin/phpcs",
 
     "[php]": {
     "editor.defaultFormatter": 
@@ -25,7 +24,7 @@
             "bin/brain-prime"
         ],
     "require-dev": {
-                "squizlabs/php_codesniffer": "^2.2.0"
+    "squizlabs/php_codesniffer": "^2.2.0"
         },
     "scripts": {
         "phpcs": "phpcs"
