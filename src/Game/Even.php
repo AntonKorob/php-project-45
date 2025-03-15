@@ -17,19 +17,17 @@ function play()
     $correctAnswersNeeded = 3;
     $correctAnswers = 0;
 
-    while ($correctAnswers < $correctAnswersNeeded) {
-        
+    for ($correctAnswers = 0; $correctAnswers < $correctAnswersNeeded; $correctAnswers++) {
         $number = rand(1, 100);
         line('Question: %s', $number);
         $answer = prompt('Your answer');
-
+    
         $correctAnswer = isEven($number) ? 'yes' : 'no';
-
+    
         if ($answer === $correctAnswer) {
             line('Correct!');
-            $correctAnswers++;
         } else {
-            line("'%s' is wrong answer ;(. Correct answer was 'no'", $answer, $correctAnswer);
+            line("'%s' is wrong answer ;(. Correct answer was '%s'.", $answer, $correctAnswer);
             line("Let's try again!");
             return;
         }
