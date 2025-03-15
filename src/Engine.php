@@ -1,77 +1,41 @@
 <?php
-namespace Engine;
+namespace BrainGames\Engine;
 
-// generateRandomNumber
-function generateRandomNumber(int $min, int $max): int
-{
-    return rand($min, $max);
-}
+use function cli\line;
+use function cli\prompt;
 
-// generateRandomOperation
-function generateRandomOperation(): string
-{
-    $operations = ['+', '-', '*'];
-    return $operations[array_rand($operations)];
-}
+use function BrainGames\Game\Calc\generateRandomNumber;
+use function BrainGames\Game\Calc\generateRandomOperation;
+use function BrainGames\Game\Calc\calculate;
 
-// calculate
-function calculate(int $a, int $b, string $operation): int
-{
-    switch ($operation) {
-        case '+':
-            return $a + $b;
-        case '-':
-            return $a - $b;
-        case '*':
-            return $a * $b;
-        default:
-            throw new \InvalidArgumentException("Unsupported operation: $operation");
-    }
-}
+use function BrainGames\Game\Even\isEven;
 
-// calculateNOD
-function calculateNOD(int $a, int $b): int
-{
-// Начинаем с двух чисел, назовем их a и b.
-// Проверяем, не равно ли b нулю:
-// Если b равно 0, то НОД равен a.
-// Если b не равно 0, обновляем значения:
-// Присваиваем a значение b, а b — остаток от деления a на b.
-// Повторяем шаги 2 и 3, пока b не станет равным 0.
-// Когда b станет 0, a будет содержать НОД.
+use function BrainGames\Game\Gcd\calculateNOD;
 
-        // Пока b не равно 0
-     while ($b !== 0) {
-        // Сохраняем значение b
-        $temp = $b;
-        // Обновляем b как остаток от деления a на b
-        $b = $a % $b;
-        // Обновляем a как старое значение b
-        $a = $temp;
-    }
-    // Когда b равно 0, НОД равен a
-    return $a;
-}
+use function BrainGames\Games\Prime\isPrime;
+
+use function BrainGames\Games\Progression\generateProgression;
+use function BrainGames\Games\Progression\hideElement;
+
+// ============================================
+
 // runCalculator
 function runCalculator()
 {
-
     $correctAnswersNeeded = 3;
     $correctAnswers = 0;
 
+    // Game loop
     while ($correctAnswers < $correctAnswersNeeded) {
         $a = generateRandomNumber(1, 100);
         $b = generateRandomNumber(1, 100);
-        // $a = 3;
-        // $b = 2;
+
         $operation = generateRandomOperation();
 
         line('Question: %d %s %d', $a, $operation, $b);
         $userAnswer = prompt('Your answer');
 
         $correctAnswer = calculate($a, $b, $operation);
-
-        // var_dump($correctAnswer);
 
         if ((int)$userAnswer === $correctAnswer) {
             line('Correct!');
@@ -85,7 +49,37 @@ function runCalculator()
 
     line('Congratulations! You solved all problems correctly!');
 }
+// ============================================
+function play()
+{
+    line('Answer "yes" if the number is even, otherwise answer "no".');
+        
+    $correctAnswersNeeded = 3;
+    $correctAnswers = 0;
 
+    for ($correctAnswers = 0; $correctAnswers < $correctAnswersNeeded; $correctAnswers++) {
+        $number = rand(1, 100);
+        line('Question: %s', $number);
+        $answer = prompt('Your answer');
+    
+        $correctAnswer = isEven($number) ? 'yes' : 'no';
+    
+        if ($answer === $correctAnswer) {
+            line('Correct!');
+        } else {
+            line("'%s' is wrong answer ;(. Correct answer was '%s'.", $answer, $correctAnswer);
+            line("Let's try again!");
+            return;
+        }
+    }
+
+    line("Congratulations, %s!");
+    
+}
+
+// ============================================
+
+// runCaclulatorNOD
 function runCaclulatorNOD() 
 {   
     $correctAnswersNeeded = 3;
@@ -94,15 +88,12 @@ function runCaclulatorNOD()
 while ($correctAnswers < $correctAnswersNeeded) {
     $a = generateRandomNumber(1, 100);
     $b = generateRandomNumber(1, 100);
-    // $a = 3;
-    // $b = 15;
+
 
     line('Find the greatest common divisor of given numbers.');
     line('Question: %s %s', $a, $b);
 
     $correctAnswer = calculateNOD($a, $b);
-
-    // var_dump($correctAnswer);
 
     $userAnswer = prompt('Your answer');
 
@@ -119,23 +110,30 @@ while ($correctAnswers < $correctAnswersNeeded) {
 }
 }
 
-// generateProgression
+// ============================================
 
-function generateProgression(int $length, int $start, int $step): array
-{
-    $progression = [];
-    for ($i = 0; $i < $length; $i++) {
-        $progression[] = $start + $i * $step;
-    }
-    return $progression;
-}
+// runPrime
 
-// hideElement
-function hideElement(array $progression, int $hiddenIndex): array
+function runPrime()
 {
-    $progression[$hiddenIndex] = '..';
-    return $progression;
+    line('Answer "yes" if the number is even, otherwise answer "no".');
+        
+        $number = generateRandomNumber(1, 100);
+        line('Question: %s', $number);
+        $answer = prompt('Your answer');
+
+        $correctAnswer = isPrime($number) ? 'yes' : 'no';
+
+        if ($answer === $correctAnswer) {
+            line('Correct!');
+        } else {
+            line("'%s' is wrong answer ;(. Correct answer was 'no'", $answer, $correctAnswer);
+            line("Let's try again!");
+            return;
+        }
+
 }
+// ============================================
 
 // playProgressionGame
 function runProgressionGame()
@@ -174,53 +172,11 @@ function runProgressionGame()
     line("Congratulations!");
 }
 
-// isPrime
 
-function isPrime($n)
-{
-    // Числа меньше 2 не являются простыми
-    if ($n < 2) {
-        return false;
-    }
 
-    // 2 — единственное четное простое число
-    if ($n === 2) {
-        return true;
-    }
 
-    // Все остальные четные числа не являются простыми
-    if ($n % 2 === 0) {
-        return false;
-    }
 
-    // Проверяем делители от 3 до квадратного корня из n
-    for ($i = 3; $i <= sqrt($n); $i += 2) {
-        if ($n % $i === 0) {
-            return false;
-        }
-    }
 
-    // Если ни одно из условий не выполнено, число простое
-    return true;
-}
 
-function runPrime()
-{
-    line('Answer "yes" if the number is even, otherwise answer "no".');
-        
-        $number = generateRandomNumber(1, 100);
-        line('Question: %s', $number);
-        $answer = prompt('Your answer');
 
-        $correctAnswer = isPrime($number) ? 'yes' : 'no';
-
-        if ($answer === $correctAnswer) {
-            line('Correct!');
-        } else {
-            line("'%s' is wrong answer ;(. Correct answer was 'no'", $answer, $correctAnswer);
-            line("Let's try again!");
-            return;
-        }
-
-}
 
