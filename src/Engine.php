@@ -1,9 +1,6 @@
 <?php
 namespace Engine;
 
-// use function cli\line;
-// use function cli\prompt;
-
 // generateRandomNumber
 function generateRandomNumber(int $min, int $max): int
 {

@@ -3,7 +3,6 @@ echo 'Hello Anton ...';
 function dd($item)
 {
     var_dump($item);
-
 }
 // $data = ['first_name' => 'Mark', 'last_name' => 'Smith'];
 
@@ -371,5 +370,87 @@ function combine(array $data)
 //     [ 'e' => 9 ],
 // ]));
 
+function romanToInt($s) {
+    $romanValues = [
+        'I' => 1,
+        'V' => 5,
+        'X' => 10,
+        'L' => 50,
+        'C' => 100,
+        'D' => 500,
+        'M' => 1000
+    ];
+    
+    $total = 0;
+    $prevValue = 0;
+    
+    for ($i = strlen($s) - 1; $i >= 0; $i--) {
+        $currentValue = $romanValues[$s[$i]];
+        
+        if ($currentValue >= $prevValue) {
+            $total += $currentValue;
+        } else {
+            $total -= $currentValue;
+        }
+        
+        $prevValue = $currentValue;
+    }
+    
+    return $total;
+}
+// dd(romanToInt("IIIV"));
 
-?>
+
+// Example 1:
+
+$strs = ["flower","flow","flight"];
+// Output: "fl"
+function longestCommonPrefix(array $strs)
+    {
+        if(empty($strs)){
+            return '';
+        }
+
+        $prefix = $strs[0];
+        $length = strlen($prefix);
+
+        foreach ($strs as $str) {
+            while ($length > 0 && strncmp($prefix, $str, $length)!== 0) {
+                $length--;
+                $prefix = substr($prefix, 0, $length);
+        }
+        if($length == 0){
+            return '';
+        }
+        }
+        return $prefix;
+    }
+// dd(longestCommonPrefix($strs));
+
+$s = '{}()[][h';
+function isValid($s) {
+    $stack = [];
+    $map = [
+        ')' => '(',
+        ']' => '[',
+        '}' => '{'
+    ];
+    for($i = 0; $i < strlen($s); $i++) {
+        $char = $s[$i];
+        if(in_array($char, ['(', '[', '{'])) {
+            array_push($stack, $char);
+        }elseif (array_key_exists($char, $map)) {
+            if(empty($stack) || array_pop($stack)!== $map[$char]) {
+                return false;
+            }
+        }
+
+    }
+   
+    return empty($stack);
+}
+
+
+// dd(isValid($s));
+
+
