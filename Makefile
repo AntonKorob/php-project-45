@@ -2,18 +2,18 @@
 install:
 	composer install
 
-brain-games:
-	php bin/brain-games
-brain-even:
-	php bin/brain-even
 brain-calc:
 	php bin/brain-calc
+brain-even:
+	php bin/brain-even
+brain-games:
+	php bin/brain-games
 brain-gcd:
 	php bin/brain-gcd
-brain-progression:
-	php bin/brain-progression
 brain-prime:
 	php bin/brain-prime
+brain-progression:
+	php bin/brain-progression
 
 .PHONY: test
 
