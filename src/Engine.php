@@ -93,7 +93,7 @@ function play()
         }
     }
 
-    line("Congratulations, %s!");
+    line("Congratulations, %s!", 'Tirion');
 
 }
 
