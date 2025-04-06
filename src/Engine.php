@@ -88,7 +88,7 @@ function play()
             line('Correct!');
         } else {
             line("'%s' is wrong answer ;(. Correct answer was '%s'.", $answer, $correctAnswer);
-            line("Let's try again Tirion!");
+            line("Let's try again, Tirion!");
             return;
         }
     }
